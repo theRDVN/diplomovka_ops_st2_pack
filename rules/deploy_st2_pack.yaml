@@ -1,0 +1,18 @@
+---
+name: "deploy_st2_pack"
+pack: "st2_diplomovka_ops"
+description: "Univerzalny webhook pre deploy packov do st2"
+enabled: true
+
+type:
+  ref: "standard"
+
+trigger:
+  type: "core.st2.webhook"
+  parameters:
+    url: "deploy-st2-pack"
+
+action:
+  ref: "packs.install"
+  parameters:
+    packs: ['{{trigger.body.repository.html_url}}']
